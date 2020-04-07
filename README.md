@@ -28,10 +28,10 @@ The following files should exist in your source directory and have the given fun
 4. run_autograder - Autograder required file. This file is what is run by the autograder system. For more information see comments in this file. 
 5. grade.sh - Used by run_autograder to grade each individual query. See file for additional information. 
 6. generate_* files are simple scripts that generate sets of files that you can use to troubleshoot your queries.
-  1.  generate_keys takes key1.sql, ..., keyn.sql and generates the output of those queries to key1.txt, ..., keyn.txt. These are used in grade.sh
-  2.  generate_answers copies the keyX.sql files and moves them to the submission folder for testing the run_autograder script. 
-  3.  generate_error_answers copies erroneous answers to the submission folder for testing the run_autograder script.. 
-  4.  generate_upload_zip creates a zip file for you to upload to Gradescope.com
+    1. generate_keys takes key1.sql, ..., keyn.sql and generates the output of those queries to key1.txt, ..., keyn.txt. These are used in grade.sh
+    2. generate_answers copies the keyX.sql files and moves them to the submission folder for testing the run_autograder script. 
+    3. generate_error_answers copies erroneous answers to the submission folder for testing the run_autograder script.. 
+    4. generate_upload_zip creates a zip file for you to upload to Gradescope.com
 7. cleanup removes temporary files created during testing. 
 8. keyN.sql: a series of key1.sql...keyN.sql files that contain the answers to your SQL questions. These files are run on the database to create answers that are used to grade your student's submission files. 
 9. *.json files are used to construct a results.json file for Gradescope.com.
