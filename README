@@ -1,65 +1,37 @@
--------------------------------------------------------------------------------
-
-Copyright 2020 Scot Anderson
-
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-    http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
-
--------------------------------------------------------------------------------
+# SQLiteAutograder for Gradescope - For assignments and tests.
 
 This folder mimics the contents of the Autograder feature on gradescope.com. 
-Only the ./source folder contains files that need to be edited. The following 
-files should exist in your source directory and have the given functionality:
+Only the ./source folder contains files that need to be edited. 
 
- 1. setup.sh - Autograder required file. It makes sure sqlite3 is installed
- 2. university.db - sqlite database that we are using to test our queries. 
-    You should upload your own. 
- 3. set_database is the file that sets the database name for all the scripts.
-    You will need to edit this file if you rename the database. 
- 4. run_autograder - Autograder required file. This file is what is run by the
-    autograder system. For more information see comments in this file. 
- 5. grade.sh - Used by run_autograder to grade each individual query. See file
-    for additional information. 
- 6. generate_* files are simple scripts that generate sets of files that you
-    can use to troubleshoot your queries.
-    6.1  generate_keys takes key1.sql, ..., keyn.sql and generates the output of 
-         those queries to key1.txt, ..., keyn.txt. These are used in grade.sh
-    6.2  generate_answers copies the keyX.sql files and moves them to the submission
-         folder for testing the run_autograder script. 
-    6.3  generate_error_answers copies erroneous answers to the submission folder
-         for testing the run_autograder script.. 
-    6.4  generate_upload_zip creates a zip file for you to upload to Gradescope.com
- 7. cleanup.sh removes temporary files created during testing. 
- 8. keyN.sql: a series of key1.sql...keyN.sql files that contain the answers
-    to your SQL questions. These files are run on the database to create answers 
-    that are used to grade your student's submission files. 
- 9. *.json files are used to construct a results.json file for Gradescope.com.
+## TYPICAL USE CASE:
 
-TYPICAL USE CASE:
+1. Create a database file using sqlite3 
+  2. Place the database file in the source directory
+  3. Edit the source/set_database file replacing university.db with your filename.
+2. Write a series of query key files (in the education parlance not the security parlance). They should be named key1.sql, key2.sql ... and they should contain only one query per file. 
+3. Delete any keyN.sql files that you did not overwrite.
 
- 1. Create a database file using sqlite3 
-    a) Place the database file in the source directory
-    b) Edit the source/set_database file replacing university.db with your 
-       filename.
- 2. Write a series of query key files (in the education parlance not the Comp. 
-    Sci. parlance). They should be named key1.sql, key2.sql ... and they should
-    contain only one query per file. 
- 3. Delete any keyN.sql files that you did not overwrite.
+## Testing
 
-To Test your files (from the source directory) run the following:
- 1. # ./generate_keys && ./generate_answers 
-    You should now see key1.txt, key2.txt ... in this folder 
-    and answer2.sql, ... in ../submission/
- 2. From the autograder_files directory, run: # source/runautograder (this is
-    where gradescope will copy and run the file. 
- 3. Check the output in result.json in the results folder. It should show you a 
-    1/1 for each query you wrote.
+To Test your files (from the source directory) run 
+
+`./test` 
+
+This will run several commands (see the script to see what is actually happening) and outputs the results file that will be used by Gradescope. 
+
+## File details
+The following files should exist in your source directory and have the given functionality:
+
+1. setup.sh - Autograder required file. It makes sure sqlite3 is installed
+2. university.db - sqlite database that we are using to test our queries. You should upload your own. 
+3. set_database is the file that sets the database name for all the scripts. You will need to edit this file if you rename the database. 
+4. run_autograder - Autograder required file. This file is what is run by the autograder system. For more information see comments in this file. 
+5. grade.sh - Used by run_autograder to grade each individual query. See file for additional information. 
+6. generate_* files are simple scripts that generate sets of files that you can use to troubleshoot your queries.
+  1.  generate_keys takes key1.sql, ..., keyn.sql and generates the output of those queries to key1.txt, ..., keyn.txt. These are used in grade.sh
+  2.  generate_answers copies the keyX.sql files and moves them to the submission folder for testing the run_autograder script. 
+  3.  generate_error_answers copies erroneous answers to the submission folder for testing the run_autograder script.. 
+  4.  generate_upload_zip creates a zip file for you to upload to Gradescope.com
+7. cleanup removes temporary files created during testing. 
+8. keyN.sql: a series of key1.sql...keyN.sql files that contain the answers to your SQL questions. These files are run on the database to create answers that are used to grade your student's submission files. 
+9. *.json files are used to construct a results.json file for Gradescope.com.

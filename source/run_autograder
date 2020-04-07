@@ -11,4 +11,9 @@ for ((i=1; i<$keycount; i++)) do
 done
 ./source/grade.sh $keycount No
 # Get the answers together
-cat ./source/json_top.json results1.json  results2.json results3.json results4.json results5.json results6.json results7.json ./source/json_end.json > ./results/results.json
+cat ./source/json_top.json > ./results/results.json
+for ((i=1; i<=$keycount; i++)) do
+  cat results$i.json >> ./results/results.json 
+done
+cat ./source/json_end.json >> ./results/results.json
+rm -f results[0-9]*.json
