@@ -1,0 +1,10 @@
+#!/bin/bash
+# This file expects your answer keys to be stored in key1.sql, ..., keyn.sql. 
+# This file is used in run_autograder to generate output that will be checked
+# against the student's queries output. 
+# THIS SCRIPT EXPECT TO BE RUN FROM THE ./source DIRECTORY.
+source ./set_database # We can't guarantee that the database variable is set, so we set it here.
+DIRECTORY=.
+for i in $DIRECTORY/key[0-9]*.sql; do
+  sqlite3 $DATABASE ".read ${i}" > "${i/\.sql/\.txt}"
+done

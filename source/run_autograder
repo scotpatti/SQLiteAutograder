@@ -1,0 +1,14 @@
+#!/bin/bash
+cd source
+source ./set_database 
+./generate_keys
+#get the number of keys - assuming they are numbered 1-n
+keycount=`ls -lq key[0-9]*.sql | wc -l`
+cd ..
+# Run each query from the student. If they don't provide a file, then it is wrong - and that actually works
+for ((i=1; i<$keycount; i++)) do
+  ./source/grade.sh $i Yes
+done
+./source/grade.sh $keycount No
+# Get the answers together
+cat ./source/json_top.json results1.json  results2.json results3.json results4.json results5.json results6.json results7.json ./source/json_end.json > ./results/results.json

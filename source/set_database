@@ -1,0 +1,2 @@
+#This file is run from other scripts as # source ./set_database
+export DATABASE="university.db"
