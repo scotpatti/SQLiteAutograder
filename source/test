@@ -1,5 +1,6 @@
 #!/bin/bash
-./generate_keys && ./generate_answers
+./generate_keys
+./generate_answers
 cd ..
 ./source/run_autograder
 echo results of test:
