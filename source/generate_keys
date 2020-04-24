@@ -6,5 +6,5 @@
 source ./set_database # We can't guarantee that the database variable is set, so we set it here.
 DIRECTORY=.
 for i in $DIRECTORY/key[0-9]*.sql; do
-  sqlite3 $DATABASE ".read ${i}" > "${i/\.sql/\.txt}"
+  sqlite3 -init sqliterc $DATABASE ".read ${i}" > "${i/\.sql/\.txt}"
 done

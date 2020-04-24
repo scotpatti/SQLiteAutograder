@@ -7,7 +7,7 @@ problem=$1
 comma=$2
 CORRECTQ=`cat ./source/correctQuery.json`
 ERRORQ=`cat ./source/errorQuery.json`
-sqlite3 ./source/${DATABASE} ".read ./submission/answer${problem}.sql" > results${problem}.txt
+sqlite3 -init ./source/sqliterc ./source/${DATABASE} ".read ./submission/answer${problem}.sql" > results${problem}.txt
 if cmp -s ./source/key${problem}.txt results${problem}.txt; then
    result="${CORRECTQ/REPLACE/$problem}" > ./results${problem}.json
 else
