@@ -6,10 +6,17 @@ Only the ./source folder contains files that need to be edited.
 ## TYPICAL USE CASE:
 
 1. Create a database file using sqlite3 
-  2. Place the database file in the source directory
-  3. Edit the source/set_database file replacing university.db with your filename.
+  1. Place the database file in the source directory
+  2. Edit the source/set_database file replacing university.db with your filename.
 2. Write a series of query key files (in the education parlance not the security parlance). They should be named key1.sql, key2.sql ... and they should contain only one query per file. 
 3. Delete any keyN.sql files that you did not overwrite.
+4. From the source directory run ./test and inspect the output. If any answers are listed as incorrect. There is a problem with one of your queries. 
+5. After you are happy with your queries, from the source directory run ./clean which will delete all the generated files used in the test. 
+6. From the source directory run ./generate_upload_zip
+7. Upload the zip file to gradescope following their directions.
+8. To test on grade scope submit your answers in files named answer1.sql, ..., answerN.sql
+
+# Parts and pieces explained
 
 ## Testing
 
@@ -17,7 +24,7 @@ To Test your files (from the source directory) run
 
 `./test` 
 
-This will run several commands (see the script to see what is actually happening) and outputs the results file that will be used by Gradescope. 
+This will run several commands (see the script to see what is actually happening) that outputs the json results file that Gradescope uses. Examine the output to make sure that all the answers are correct. They should be correct because the script is copying the key files to answer files and then comparing the output of each query. Not a great test, but a basic one. I always test my queries in sqlite browser before I put use them in this tool. 
 
 ## File details
 The following files should exist in your source directory and have the given functionality:
