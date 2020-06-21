@@ -6,8 +6,8 @@ Only the ./source folder contains files that need to be edited.
 ## TYPICAL USE CASE:
 
 1. Create a database file using sqlite3 
-  1. Place the database file in the source directory
-  2. Edit the source/set_database file replacing university.db with your filename.
+   1. Place the database file in the source directory
+   2. Edit the source/set_database file replacing university.db with your filename.
 2. Write a series of query key files (in the education parlance not the security parlance). They should be named key1.sql, key2.sql ... and they should contain only one query per file. 
 3. Delete any keyN.sql files that you did not overwrite.
 4. From the source directory run ./test and inspect the output. If any answers are listed as incorrect. There is a problem with one of your queries. 
