@@ -8,6 +8,13 @@ comma=$2
 CORRECTQ=`cat ./source/correctQuery.json`
 ERRORQ=`cat ./source/errorQuery.json`
 sqlite3 -init ./source/sqliterc ./source/${DATABASE} ".read ./submission/answer${problem}.sql" > results${problem}.txt
+#Added in 2021 for questions that result in side effects. See docs.
+alternate_test="./source/test${1}.sql"
+if [ -f $alternate_test ]; then
+   #echo "File found: ${alternate_test}"
+   sqlite3 -init ./source/sqliterc ./source/${DATABASE} ".read ${alternate_test}" > results${problem}.txt
+fi
+#End Added in 2021
 if cmp -s ./source/key${problem}.txt results${problem}.txt; then
    result="${CORRECTQ/REPLACE/$problem}" > ./results${problem}.json
 else
@@ -17,4 +24,5 @@ if [ $comma = "No" ]; then
    result="${result/'},'/'}'}"
 fi
 echo $result > ./results${problem}.json
+# In debugging, comment out the next line
 rm results${problem}.txt

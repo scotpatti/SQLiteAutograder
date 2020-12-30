@@ -1,5 +1,6 @@
 #!/bin/bash
-./generate_keys
+#used to generate answers!
+./generate_keys 
 ./generate_answers
 cd ..
 ./source/run_autograder
