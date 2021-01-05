@@ -1,9 +1,0 @@
-#!/bin/bash
-#used to generate answers!
-./generate_keys 
-./generate_answers
-cd ..
-./source/run_autograder
-echo results of test:
-cat results/results.json
-cd source

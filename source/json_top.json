@@ -1,4 +1,5 @@
-{ "visibility": "visible",
+{ 
+  "visibility": "visible",
   "stdout_visibility": "hidden",
   "tests":
   [

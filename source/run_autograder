@@ -1,28 +1,29 @@
 #!/bin/bash
 #running this file will not alter the database.
+echo "run_autograder is running ..."
 cd source
-source ./set_database 
-./generate_keys
-echo "Generated Keys ..."
+./generate_keys.sh
+#The source database can be set later for individual problems if needed. See before[x].sh and after[x].sh
+. ./get_database.sh 
 #Reset the database in case we made changes.
-cp -f ./${DATABASE}.original ./${DATABASE}
-echo "We reset database back to original ..."
+./restoredb.sh
 #get the number of keys - assuming they are numbered 1-n
 keycount=`ls -lq | grep "key[0-9]*.sql" | wc -l`
-echo "Grading ${keycount} files ..."
+echo "  Grading ${keycount} files ..."
 cd ..
 # Run each query from the student. If they don't provide a file, then it is wrong - and that actually works
 for ((i=1; i<$keycount; i++)) do
-  echo "Grading answer ${i} ..."
-  ./source/grade.sh $i Yes
+  echo "  Grading answer ${i} ..."
+  . ./source/grade.sh $i Yes
 done
-echo "Grading answer ${keycount} ..."
+echo "  Grading answer ${keycount} ..."
 ./source/grade.sh $keycount No
 # Get the answers together
-echo "Organizing results ..."
+echo "  Organizing results ..."
 cat ./source/json_top.json > ./results/results.json
 for ((i=1; i<=$keycount; i++)) do
-  cat results$i.json >> ./results/results.json 
+  r=`cat results${i}.json`
+  echo "    $r" >> ./results/results.json 
 done
 cat ./source/json_end.json >> ./results/results.json
 rm -f results[0-9]*.json
