@@ -1,0 +1,10 @@
+{ 
+  "visibility": "visible",
+  "stdout_visibility": "hidden",
+  "tests":
+  [
+    { "score": 1.0, "max_score": 1.0, "number": "1", "visibility": "visible" },
+    { "score": 1.0, "max_score": 1.0, "number": "2", "visibility": "visible" },
+    { "score": 1.0, "max_score": 1.0, "number": "3", "visibility": "visible" }
+  ]
+}

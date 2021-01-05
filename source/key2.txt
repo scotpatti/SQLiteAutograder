@@ -1,0 +1,5 @@
+
+dept_name|tot_credits
+Comp. Sci.|28
+Biology|8
+
