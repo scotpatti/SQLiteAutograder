@@ -17,14 +17,15 @@ fi
 # If you need to alter the database before the query, do it here e.g. you shouldn't need this.
 if [ -f "./source/key${problem}s.sql" ]; then
    echo "  key${problem}s.sql is running ..."
+   ./source/sqlite3 -init ./source/sqliterc ./source/${DATABASE} ".read ./source/key${problem}s.sql"
 fi
 # run the actual student query here 
-sqlite3 -init ./source/sqliterc ./source/${DATABASE} ".read ./submission/answer${problem}.sql" > results${problem}.txt
+./source/sqlite3 -init ./source/sqliterc ./source/${DATABASE} ".read ./submission/answer${problem}.sql" > results${problem}.txt
 # if you need to run an alternate sql test, do it here e.g. if you need to test for student side effects
 alternate_sql_test="./source/test${problem}.sql"
 if [ -f $alternate_sql_test ]; then
    echo "  ${alternate_sql_test} running..."
-   sqlite3 -init ./source/sqliterc ./source/${DATABASE} ".read ${alternate_sql_test}" > results${problem}.txt
+   ./source/sqlite3 -init ./source/sqliterc ./source/${DATABASE} ".read ${alternate_sql_test}" > results${problem}.txt
 fi
 # if you need to run an alternate test against the sql source, do it here e.g. testing for subqueries
 alternate_source_test="./source/test${problem}.sh"
@@ -37,7 +38,12 @@ if [ -f $alternate_source_test ]; then
       echo "Failed generic test" > results${problem}.txt
    fi
 fi
-# If there is teardown for the problem, do it here e.g. you can change the database back to the original if need be
+# If there is sql teardown for the problem, do it here e.g. you can run a drop command.
+if [ -f "./source/key${problem}t.sql" ]; then
+   echo "  key${problem}t.sql is running ..."
+   ./source/sqlite3 -init ./source/sqliterc ./source/${DATABASE} ".read ./source/key${problem}t.sql"
+fi
+# If there is environment teardown for the problem, do it here e.g. you can change the database back to the original if need be
 if [ -f "./source/after${problem}.sh" ]; then
    echo "  after${problem}.sh is running ..."
    script="./source/after${problem}.sh"
